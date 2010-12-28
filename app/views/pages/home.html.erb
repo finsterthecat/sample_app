@@ -5,6 +5,9 @@
   <a href="http://railstutorial.org/">Ruby on Rails Tutorial</a>
   sample application.
 </p>
-
-<%= link_to "Sign up now!", signup_path, :class => "signup_button round" %>
+<% if signed_in? %>
+  <div class='signup_button round'>You are signed in!</div>
+<% else %>
+  <%= link_to "Sign up now!", signup_path, :class => "signup_button round" %>
+<% end %>
 
