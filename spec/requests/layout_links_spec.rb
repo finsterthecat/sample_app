@@ -45,12 +45,11 @@ describe "LayoutLinks" do
     it "should have a signin link" do
       visit root_path
       response.should have_selector("a", :href => signin_path,
-                                         :content => "Sign in")
+                                    :content => "Sign in")
     end
   end
 
   describe "when signed in" do
-
     before(:each) do
       @user = Factory(:user)
       integration_sign_in(@user)
@@ -59,15 +58,34 @@ describe "LayoutLinks" do
     it "should have a signout link" do
       visit root_path
       response.should have_selector(
-                          "a", :href => signout_path,
-                          :content => "Sign out")
+        "a", :href => signout_path,
+        :content => "Sign out")
     end
 
     it "should have a profile link" do
       visit root_path
       response.should have_selector(
-                          "a", :href => user_path(@user),
-                          :content => "Profile")
+        "a", :href => user_path(@user),
+        :content => "Profile")
+    end
+
+  end
+
+  # Ultimately this will test that admin users get delete options
+  # while others do not
+  describe "when signed in as admin" do
+    before(:each) do
+      @user = Factory(:user)
+      integration_sign_in(@user)
+    end
+
+    it "should show a delete link on user page" do
+      visit users_path
+      response.should have_selector('title', :content => 'All users')
+      #response.should have_selector(
+      #  "a", 
+      #  :content => "delete")
+
     end
   end
 
