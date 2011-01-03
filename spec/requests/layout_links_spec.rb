@@ -81,10 +81,16 @@ describe "LayoutLinks" do
 
     it "should show a delete link on user page" do
       visit users_path
-      response.should have_selector('title', :content => 'All users')
-      #response.should have_selector(
-      #  "a", 
-      #  :content => "delete")
+      response.body.should have_selector('title', :content => 'All users')
+      #Not sure how to do this. Currently not finding shit...
+      response.should have_selector(
+        "a", 
+        :href => "/users/1",
+        :'data-confirm' => "You sure?",
+        :'data-method' => "delete",
+        :rel => "nofollow",
+        :title => "Delete Tony Brouwer",
+        :content => "delete")
 
     end
   end

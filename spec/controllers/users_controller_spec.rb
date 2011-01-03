@@ -314,11 +314,17 @@ describe UsersController do
         end.should change(User, :count).by(-1)
       end
 
-      it "should redirec to the users page" do
+      it "should redirect to the users page" do
         delete :destroy, :id => @user
         response.should redirect_to(users_path)
       end
 
+      it "should stop him from suicide" do
+        lambda do
+          delete :destroy, :id => controller.current_user
+        end.should_not change(User, :count)
+        flash[:error].should =~ /don't delete yourself/i
+      end
     end
   end
 
