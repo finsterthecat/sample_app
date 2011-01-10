@@ -53,16 +53,12 @@ class UsersController < ApplicationController
       flash[:error] = "Hey! Don't delete yourself!"
     else
       user.destroy
-      flash[:success] = "User destroyed."
+      flash[:success] = "User #{user.name} destroyed."
     end
     redirect_to users_path
   end
 
   private
-
-    def authenticate
-      deny_access unless signed_in?
-    end
 
     def correct_user
       @user = User.find(params[:id])

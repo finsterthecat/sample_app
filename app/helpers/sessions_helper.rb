@@ -22,6 +22,10 @@ module SessionsHelper
     current_user = nil
   end
 
+  def authenticate
+    deny_access unless signed_in?
+  end
+
   def deny_access
     store_location
     redirect_to signin_path, :notice => "Please sign in to access this page"
@@ -53,4 +57,5 @@ module SessionsHelper
     def clear_return_to
       session[:return_to] = nil
     end
+
 end
