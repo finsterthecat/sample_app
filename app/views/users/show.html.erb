@@ -5,7 +5,7 @@
         <%= gravatar_for @user %>
         <%= @user.name %>
       </h1>
-      <% unless @user.microposts.empty? %>
+      <% if @user.microposts.any? %>
         <table class="microposts" summary="User microposts">
           <%= render @microposts %>
         </table>

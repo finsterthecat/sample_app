@@ -1,5 +1,5 @@
 class MicropostsController < ApplicationController
-  before_filter :authenticate, :only => [:create, :destroy]
+  before_filter :authenticate
   before_filter :authorized_user, :only => :destroy
 
   def create
@@ -22,6 +22,6 @@ class MicropostsController < ApplicationController
 
     def authorized_user
       @micropost = Micropost.find(params[:id])
-      redirect_to root_path unless current_user?(@micropost_user)
+      redirect_to root_path unless current_user?(@micropost.user)
     end
 end
