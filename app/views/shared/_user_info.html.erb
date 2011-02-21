@@ -7,6 +7,8 @@
     <span class="microposts">
       <%= pluralize(current_user.microposts.count, "micropost") %>
     </span>
+    <span id='inputcount'></span>
+    <!-- <?= observe_field "mpost_data", :function => 'count_stuff' %> -->
   </a>
 </div>
 

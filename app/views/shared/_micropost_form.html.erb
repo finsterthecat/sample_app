@@ -1,10 +1,13 @@
 <%= form_for @micropost do |f| %>
   <%= render 'shared/error_messages', :object => f.object %>
-  <div class="field">
-    <%= f.text_area :content %>
+  <div id="mpost_content" class="field">
+    <%= f.text_area :content, :class => "countdownable" %>
   </div>
   <div class="actions">
-    <%= f.submit "Submit" %>
+    <span class="countdown">140</span>
+    <%= f.submit "Submit", :value => "Tweet" %>
   </div>
 <% end %>
-
+<% content_for :more_head_content do %>
+  <%= javascript_include_tag 'countdown' %>
+<% end %>

@@ -19,4 +19,9 @@ class PagesController < ApplicationController
   def help
     @title = "Help"
   end
+
+  def blah
+    @title = "Blah"
+    @micropost = Micropost.new
+  end
 end

@@ -36,7 +36,7 @@ module SessionsHelper
     clear_return_to
   end
 
-  # uiser == current_user will not work!!! Switched to this.
+  # user == current_user will not work!!! Switched to this.
   def current_user?(user)
     return false unless user && current_user
     user.id == current_user.id

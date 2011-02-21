@@ -1,0 +1,18 @@
+<h1>Sample App</h1>
+<p>
+  Contact Ruby on Rails Tutorial about the sample app at the
+  <a href="http://railstutorial.org/feedback">feedback page</a>.
+  <table>
+    <tr>
+      <td class="main">
+        <h1 class="micropost">What's up?</h1>
+        <%= render 'shared/micropost_form' %>
+        <span class="countdown"></span>
+      </td>
+    </tr>
+  </table>
+</p>
+
+<% (@more_head_content ||= "") += capture do %>
+  <%javascript_include_tag 'countdown' %>
+<% end %>
