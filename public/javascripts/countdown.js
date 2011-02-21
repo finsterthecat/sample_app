@@ -6,11 +6,15 @@
       elt.update( 140 - event.element().getValue().length );
   }
 
+  function apply_countdown(watch_elt, display_elt) {
+    watch_elt.observe('keyup', function(event) {
+      msg_countdown(event, display_elt);
+    });
+  }
+
   //Tested this on jsbin: http://jsbin.com/ovobi3/4/edit
 
   document.observe("dom:loaded", function() {
-    $$('.countdownable').each( function(item) { item.observe('keyup', function(event) {
-        msg_countdown(event, $$('.countdown')[0]);
-    })});
+    $$('.countdownable').each( function(item) { apply_countdown(item, $$('.countdown')[0])});
   });
 })();
