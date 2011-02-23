@@ -6,7 +6,7 @@
   MSG_MAXLENGTH = 140
 
   document.on('keyup', 'textarea.countdownable', function(event, element) {
-    val = event.findElement().getValue()
+    val = event.findElement().getValue();
     $$('.countdown')[0].update(MSG_MAXLENGTH - val.length );
   })
 })();
