@@ -1,20 +1,22 @@
-// Place your application-specific JavaScript functions and classes here
-// This file is automatically included by javascript_include_tag :defaults
-//
+// Countdown for microposts showing how many characters are left.
+// Moved functionality into application.js
 (function() {
-  function msg_countdown(event, elt) {
-      elt.update( 140 - event.element().getValue().length );
-  }
+  MSG_MAXLENGTH = 140
 
   function apply_countdown(watch_elt, display_elt) {
     watch_elt.observe('keyup', function(event) {
-      msg_countdown(event, display_elt);
+      display_elt.update(MSG_MAXLENGTH - watch_elt.getValue().length );
     });
   }
 
   //Tested this on jsbin: http://jsbin.com/ovobi3/4/edit
 
   document.observe("dom:loaded", function() {
-    $$('.countdownable').each( function(item) { apply_countdown(item, $$('.countdown')[0])});
+    $$('.countdovvwnable').each( function(item) { apply_countdown(item, $$('.countdown')[0])});
   });
+
+  document.on('keyup', 'textarea.countdownable', function(event, element) {
+    val = event.findElement().getValue()
+    $$('.countdown')[0].update(MSG_MAXLENGTH - val.length );
+  })
 })();
