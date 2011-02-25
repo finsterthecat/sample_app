@@ -1,6 +1,10 @@
 .bundle
 db/*.sqlite3
 log/*.log
+*.log
 tmp/**/*
-webrate.log
-./**/*.swp
+*.swp
+doc/
+*-
+.DS_Store
+
