@@ -69,29 +69,32 @@ describe "LayoutLinks" do
         :content => "Profile")
     end
 
+    it "should not show a delete link on user page" do
+      visit users_path
+      response.should have_selector('title', :content => 'All users')
+      response.body.should_not have_selector(
+        "a",
+        :'data-method' => "delete",
+        :content => 'delete')
+    end
   end
 
   # Ultimately this will test that admin users get delete options
   # while others do not
   describe "when signed in as admin" do
     before(:each) do
-      @user = Factory(:user)
+      @user = Factory(:admin_user)
       integration_sign_in(@user)
     end
 
     it "should show a delete link on user page" do
       visit users_path
-      response.body.should have_selector('title', :content => 'All users')
+      response.should have_selector('title', :content => 'All users')
       #Not sure how to do this. Currently not finding shit...
-      response.should have_selector(
-        "a", 
-        :href => "/users/1",
-        :'data-confirm' => "You sure?",
+      response.body.should have_selector(
+        "a",
         :'data-method' => "delete",
-        :rel => "nofollow",
-        :title => "Delete Tony Brouwer",
-        :content => "delete")
-
+        :content => 'delete')
     end
   end
 
