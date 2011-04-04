@@ -58,4 +58,38 @@ describe "Users" do
       end
     end
   end
+
+  describe "users list " do
+    describe "for admin" do
+      before(:each) do
+        @user = Factory(:admin_user)
+        integration_sign_in(@user)
+      end
+
+      it "should show a delete link for user" do
+        visit users_path
+        response.should have_selector('title', :content => 'All users')
+        response.body.should have_selector(
+          "a",
+          :'data-method' => "delete",
+          :content => 'delete')
+      end
+    end
+
+    describe "for non-admin" do
+      before(:each) do
+        @user = Factory(:user)
+        integration_sign_in(@user)
+      end
+
+      it "should not show a delete link for user" do
+        visit users_path
+        response.should have_selector('title', :content => 'All users')
+        response.body.should_not have_selector(
+          "a",
+          :'data-method' => "delete",
+          :content => 'delete')
+      end
+    end 
+  end
 end
