@@ -156,6 +156,11 @@ describe User do
         @user.should respond_to(:feed)
       end
 
+      it "should not include another user's microposts" do
+        mp3 = Factory(:micropost, :user => Factory(:user, :email => Factory.next(:email)))
+        @user.feed.should_not include(mp3)
+      end
+
       it "should include the user's microposts" do
         @user.feed.include?(@mp1).should be_true
         @user.feed.include?(@mp2).should be_true

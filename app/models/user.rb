@@ -56,8 +56,7 @@ class User < ActiveRecord::Base
   end
 
   def feed
-    #Preliminary implementation for chapter 11
-    Micropost.where("user_id=?", id)
+    Micropost.from_users_followed_by(self)
   end
 
   def self.authenticate(email, password)

@@ -22,10 +22,10 @@ describe RelationshipsController do
       @followed = Factory(:user, :email => Factory.next(:email))
     end
 
-    it "should create a relationship" do
+    it "should create a relationship using Ajax" do
       lambda do
-        post :create, :relationship => {:followed_id => @followed}
-        response.should be_redirect
+        xhr :post, :create, :relationship => {:followed_id => @followed}
+        response.should be_success
       end.should change(Relationship, :count).by(1)
     end
   end
@@ -39,10 +39,10 @@ describe RelationshipsController do
       @relationship = @user.relationships.find_by_followed_id(@followed)
     end
 
-    it "should destroy a relationship" do
+    it "should destroy a relationship using Ajax" do
       lambda do
-        delete :destroy, :id => @relationship
-        response.should be_redirect
+        xhr :delete, :destroy, :id => @relationship
+        response.should be_success
       end.should change(Relationship, :count).by(-1)
     end
   end
